@@ -7,8 +7,8 @@ def indexpage():
 	if request.method == "POST":
 
 		print(request.form.get('name'))
-		return render_template("index2.html")
-	return render_template("index2.html")
+		return render_template("index.html")
+	return render_template("index.html")
 
 @app.route("/entry", methods=['POST'])
 def entry():
