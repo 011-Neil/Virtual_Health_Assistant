@@ -8,7 +8,6 @@ env
 *.git
 *.github
 *.md
-*.txt
 nltk_data/corpora/*
 !nltk_data/corpora/wordnet
 nltk_data/tokenizers/*
