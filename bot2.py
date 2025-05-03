@@ -22,8 +22,6 @@ raw=f.read()
 rawone=m.read()
 raw=raw.lower()# converts to lowercase
 rawone=rawone.lower()# converts to lowercase
-# nltk.download('punkt_tab') # first-time use only - Commented out
-# nltk.download('wordnet') # first-time use only - Commented out
 sent_tokens = nltk.sent_tokenize(raw)# converts to list of sentences
 word_tokens = nltk.word_tokenize(raw)# converts to list of words
 sent_tokensone = nltk.sent_tokenize(rawone)# converts to list of sentences
