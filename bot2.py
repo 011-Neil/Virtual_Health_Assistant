@@ -7,7 +7,8 @@ import numpy as np
 import random
 import string # to process standard python strings
 import nltk
-nltk.data.path.append('./nltk_data')
+nltk.download('punkt')
+
 
 
 f=open('symptom.txt','r',errors = 'ignore')
