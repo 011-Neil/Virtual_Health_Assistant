@@ -1,14 +1,13 @@
 # Meet Pybot: your friend
 import warnings
 warnings.filterwarnings("ignore")
-nltk.download()
+# nltk.download() # for downloading packages
 import numpy as np
 import random
 import string
 import nltk
-
-
-nltk.data.path = ['nltk_data']
+# nltk.download('punkt_tab')
+nltk.data.path.append('nltk_data')
 from collections import defaultdict
 
 
