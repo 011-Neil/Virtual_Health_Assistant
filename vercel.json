@@ -12,8 +12,11 @@
       "dest": "app.py"
     }
   ],
-  "ignore": [
-    "large_model_files/",
-    "data_files/"
-  ]
+  
+    "functions": [{
+      "app/**": {
+        "excludeFiles": "{__pycache__,nltk_data,*.cache,node_modules,public,app}/**"
+      }
+    }]
+  
 }
