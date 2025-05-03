@@ -7,7 +7,8 @@ import numpy as np
 import random
 import string # to process standard python strings
 import nltk
-nltk.download('punkt')
+nltk.data.path.append('nltk_data')
+
 
 
 

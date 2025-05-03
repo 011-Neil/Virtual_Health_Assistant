@@ -2,10 +2,10 @@ from flask import Flask, render_template, request, jsonify, make_response
 from bot2 import chat
 app = Flask(__name__)
 
-@app.route('/', methods = ['GET', 'POST'])
+
+@app.route('/', methods=['GET', 'POST'])
 def indexpage():
 	if request.method == "POST":
-
 		print(request.form.get('name'))
 		return render_template("index.html")
 	return render_template("index.html")
