@@ -6,7 +6,7 @@ import numpy as np
 import random
 import string
 import nltk
-nltk.download('punkt_tab')
+nltk.data.path = ['nltk_data']
 from collections import defaultdict
 
 
