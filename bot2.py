@@ -5,10 +5,23 @@ warnings.filterwarnings("ignore")
 import numpy as np
 import random
 import string
+
 import nltk
 # nltk.download('punkt_tab')
-nltk.data.path.append('nltk_data')
+# nltk.data.path.append('nltk_data')
 from collections import defaultdict
+
+from os.path import dirname, abspath, join
+
+# Get the absolute path to the current file's directory
+current_dir = dirname(abspath(__file__))
+
+# Use it for file paths
+nltk_data_path = join(current_dir, 'nltk_data')
+symptom_file = join(current_dir, 'symptom.txt')
+pincodes_file = join(current_dir, 'pincodes.txt')
+
+nltk.data.path.append(nltk_data_path)
 
 
 # File handling remains the same
