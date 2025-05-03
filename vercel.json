@@ -1,17 +1,9 @@
 {
-  "builds": [
-    {
-      "src": "app.py",
-      "use": "@vercel/python",
-      "config": {
-        "runtime": "python3.10",
-        "installCommand": "python -m pip install --upgrade pip setuptools wheel && pip install -r requirements.txt",
-        "maxLambdaSize": "250mb"
-      }
-    }
+"builds": [
+    { "src": "*.py", "use": "@vercel/python" }
   ],
-  "routes": [
-    {"src": "/static/(.*)", "dest": "/static/$1"},
-    {"src": "/(.*)", "dest": "app.py"}
-  ]
+  "redirects": [
+    { "source": "/", "destination": "/app.py" }
+  ]  
+
 }
