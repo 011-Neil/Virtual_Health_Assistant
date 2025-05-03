@@ -11,5 +11,9 @@
       "src": "/(.*)",
       "dest": "app.py"
     }
+  ],
+  "ignore": [
+    "large_model_files/",
+    "data_files/"
   ]
 }
