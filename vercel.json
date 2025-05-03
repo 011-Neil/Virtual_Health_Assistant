@@ -11,14 +11,7 @@
       "src": "/(.*)",
       "dest": "app.py"
     }
-  ],
-
-    "functions": {
-      "api/**": {
-    
-        "excludeFiles": "{__pycache__,*.cache,nltk_data,app}/**"
-      }
-    }
+  ]
 }
 
 
