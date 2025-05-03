@@ -6,7 +6,7 @@ import numpy as np
 import random
 import string
 import nltk
-# nltk.data.path.append('nltk_data')
+nltk.data.path.append('nltk_data')
 nltk.download('punkt')
 from collections import defaultdict
 
