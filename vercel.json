@@ -12,11 +12,13 @@
       "dest": "app.py"
     }
   ],
-  
-    "functions": [{
-      "app/**": {
-        "excludeFiles": "{__pycache__,nltk_data,*.cache,node_modules,public,app}/**"
+
+    "functions": {
+      "api/**": {
+    
+        "excludeFiles": "{__pycache__,*.cache,nltk_data,app}/**"
       }
-    }]
-  
+    }
 }
+
+
