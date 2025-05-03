@@ -8,7 +8,3 @@ env
 *.git
 *.github
 *.md
-nltk_data/corpora/*
-!nltk_data/corpora/wordnet
-nltk_data/tokenizers/*
-!nltk_data/tokenizers/punkt
