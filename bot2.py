@@ -1,7 +1,7 @@
 # Meet Pybot: your friend
 import warnings
 warnings.filterwarnings("ignore")
-# nltk.download() # for downloading packages
+nltk.download()
 import numpy as np
 import random
 import string
