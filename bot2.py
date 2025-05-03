@@ -10,6 +10,25 @@ nltk.data.path.append('nltk_data')
 nltk.download('punkt')
 from collections import defaultdict
 
+import nltk
+import os
+
+# Set NLTK data path to writable directory
+nltk_data_path = '/tmp/nltk_data'
+os.makedirs(nltk_data_path, exist_ok=True)
+nltk.data.path.append(nltk_data_path)
+
+# Download required NLTK data if not already present
+try:
+    nltk.data.find('tokenizers/punkt', paths=[nltk_data_path])
+except LookupError:
+    nltk.download('punkt', download_dir=nltk_data_path)
+    
+try:
+    nltk.data.find('corpora/wordnet', paths=[nltk_data_path])
+except LookupError:
+    nltk.download('wordnet', download_dir=nltk_data_path)
+
 # File handling remains the same
 f=open('symptom.txt','r',errors = 'ignore')
 m=open('pincodes.txt','r',errors = 'ignore')
