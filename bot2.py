@@ -1,5 +1,4 @@
  # Meet Pybot: your friend
-import nltk
 import warnings
 warnings.filterwarnings("ignore")
 # nltk.download() # for downloading packages
@@ -7,6 +6,9 @@ warnings.filterwarnings("ignore")
 import numpy as np
 import random
 import string # to process standard python strings
+import nltk
+nltk.data.path.append('./nltk_data')
+
 
 f=open('symptom.txt','r',errors = 'ignore')
 m=open('pincodes.txt','r',errors = 'ignore')
