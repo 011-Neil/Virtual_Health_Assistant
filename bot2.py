@@ -83,50 +83,87 @@ def basicM(sentence):
 def IntroduceMe(sentence):
     return random.choice(Introduce_Ans)
 
+# ... (keep previous imports but REMOVE sklearn imports)
+from sparse import COO, dot, stack as sparse_stack
+from collections import defaultdict
 
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
+# Add these functions
+def compute_tfidf(documents):
+    """Manual TF-IDF implementation using sparse"""
+    tokenized_docs = [LemNormalize(doc) for doc in documents]
+    idf = defaultdict(float)
+    doc_count = len(documents)
 
+    # Calculate IDF
+    for tokens in tokenized_docs:
+        for word in set(tokens):
+            idf[word] += 1
 
-# Generating response
+    # Smooth IDF
+    for word in idf:
+        idf[word] = np.log(doc_count / (1 + idf[word])) + 1
+
+    # Create vocabulary
+    vocab = list(idf.keys())
+    word_to_idx = {word: i for i, word in enumerate(vocab)}
+
+    # Calculate TF-IDF vectors
+    tfidf_vectors = []
+    for tokens in tokenized_docs:
+        tf = defaultdict(float)
+        for word in tokens:
+            tf[word] += 1
+        doc_len = len(tokens)
+        vector = np.zeros(len(vocab))
+        for word, count in tf.items():
+            if word in word_to_idx:
+                vector[word_to_idx[word]] = (count/doc_len) * idf[word]
+        tfidf_vectors.append(COO.from_numpy(vector))
+    
+    return sparse_stack(tfidf_vectors), vocab
+
+def sparse_cosine_similarity(matrix):
+    """Cosine similarity for sparse matrices"""
+    norms = np.sqrt((matrix * matrix).sum(axis=1))
+    norm_matrix = matrix / norms[:, None]
+    return norm_matrix @ norm_matrix.T
+
+# Modified response functions
 def response(user_response):
-    robo_response=''
+    robo_response = ''
     sent_tokens.append(user_response)
-    TfidfVec = TfidfVectorizer(tokenizer=LemNormalize, stop_words='english')
-    tfidf = TfidfVec.fit_transform(sent_tokens)
+    try:
+        tfidf_matrix, _ = compute_tfidf(sent_tokens)
+        similarity_matrix = sparse_cosine_similarity(tfidf_matrix)
+        user_sim = similarity_matrix[-1].todense().A1[:-1]  # Exclude self
+        
+        if len(user_sim) == 0 or (max_sim := np.max(user_sim)) == 0:
+            robo_response = "I am sorry! I don't understand you"
+        else:
+            idx = np.argmax(user_sim)
+            robo_response = sent_tokens[idx]
+    finally:
+        sent_tokens.pop()
+    return robo_response
 
-    vals = cosine_similarity(tfidf[-1], tfidf)
-
-    idx=vals.argsort()[0][-2]
-    flat = vals.flatten()
-    flat.sort()
-    req_tfidf = flat[-2]
-    if(req_tfidf==0):
-        robo_response=robo_response+"I am sorry! I don't understand you"
-        return robo_response
-    else:
-        robo_response = robo_response+sent_tokens[idx]
-        return robo_response
-
-# Generating response
-
-# Generating response
 def responseone(user_response):
-    robo_response=''
+    robo_response = ''
     sent_tokensone.append(user_response)
-    TfidfVec = TfidfVectorizer(tokenizer=LemNormalize, stop_words='english')
-    tfidf = TfidfVec.fit_transform(sent_tokensone)
-    vals = cosine_similarity(tfidf[-1], tfidf)
-    idx=vals.argsort()[0][-2]
-    flat = vals.flatten()
-    flat.sort()
-    req_tfidf = flat[-2]
-    if(req_tfidf==0):
-        robo_response=robo_response+"I am sorry! I don't understand you"
-        return robo_response
-    else:
-        robo_response = robo_response+sent_tokensone[idx]
-        return robo_response
+    try:
+        tfidf_matrix, _ = compute_tfidf(sent_tokensone)
+        similarity_matrix = sparse_cosine_similarity(tfidf_matrix)
+        user_sim = similarity_matrix[-1].todense().A1[:-1]
+        
+        if len(user_sim) == 0 or (max_sim := np.max(user_sim)) == 0:
+            robo_response = "I am sorry! I don't understand you"
+        else:
+            idx = np.argmax(user_sim)
+            robo_response = sent_tokensone[idx]
+    finally:
+        sent_tokensone.pop()
+    return robo_response
+
+# Keep the rest of your code unchanged (chat function, etc.)
 
 def chat(user_response):
     user_response=user_response.lower()
