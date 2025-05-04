@@ -48,7 +48,7 @@ var $messages = $('.messages-content'),
 $(window).load(function() {
   $messages.mCustomScrollbar();
   setTimeout(function() {
-    $('<div class="message new"><figure class="avatar"><img src="/static/robo1.jpg" /></figure>' + 'I am your chatbot. Based on your symptoms here i predict your disease. And i also suggest analgesics,treatment scans,diet for that prediction disease.' + '</div>').appendTo($('.mCSB_container')).addClass('new');
+    $('<div class="message new"><figure class="avatar"><img src="/static/images/robo1.jpg" /></figure>' + 'I am your chatbot. Based on your symptoms here i predict your disease. And i also suggest analgesics,treatment scans,diet for that prediction disease.' + '</div>').appendTo($('.mCSB_container')).addClass('new');
         setDate();
         updateScrollbar();
     textToSpeech('welcome..' );        
@@ -81,7 +81,7 @@ function insertMessage() {
   $('.message-input').val(null);
   updateScrollbar();
   setTimeout(function() {
-    $('<div class="message loading new"><figure class="avatar"><img src="/static/robo1.jpg" /></figure><span></span></div>').appendTo($('.mCSB_container'));
+    $('<div class="message loading new"><figure class="avatar"><img src="/static/images/robo1.jpg" /></figure><span></span></div>').appendTo($('.mCSB_container'));
     updateScrollbar();
     
 
@@ -103,7 +103,7 @@ function insertMessage() {
         console.log(data);
 
         $('.message.loading').remove();
-        $('<div class="message new"><figure class="avatar"><img src="/static/robo1.jpg" /> </figure>' + data.name  + '</div>').appendTo($('.mCSB_container')).addClass('new');
+        $('<div class="message new"><figure class="avatar"><img src="/static/images/robo1.jpg" /> </figure>' + data.name  + '</div>').appendTo($('.mCSB_container')).addClass('new');
         setDate();
         updateScrollbar();
         textToSpeech(data.name);
@@ -166,7 +166,7 @@ function fakeMessage() {
       }
       response.json().then(function(data) {
         console.log(data);
-        $('<div class="message new"><figure class="avatar"><img src="/static/robo1.jpg" /></figure>' + data.name + '</div>').appendTo($('.mCSB_container')).addClass('new');
+        $('<div class="message new"><figure class="avatar"><img src="/static/images/robo1.jpg" /></figure>' + data.name + '</div>').appendTo($('.mCSB_container')).addClass('new');
         setDate();
         updateScrollbar();
     
