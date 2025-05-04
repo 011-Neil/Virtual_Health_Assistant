@@ -1,9 +1,10 @@
 {
-"builds": [
-    { "src": "*.py", "use": "@vercel/python" }
+  "version": 2,
+  "builds": [
+    { "src": "api/app.py", "use": "@vercel/python" }
   ],
-  "redirects": [
-    { "source": "/", "destination": "/app.py" }
-  ]  
-
+  "routes": [
+    { "src": "/entry", "methods": ["POST"], "dest": "api/app.py" },
+    { "src": "/", "methods": ["GET", "POST"], "dest": "api/app.py" }
+  ]
 }
