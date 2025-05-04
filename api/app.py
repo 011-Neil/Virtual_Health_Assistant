@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify, make_response
 from bot2 import chat
+from whitenoise import WhiteNoise
 import os
 
 app = Flask(
@@ -8,6 +9,8 @@ app = Flask(
     static_folder=os.path.join(os.path.dirname(__file__), 'static'),
     template_folder=os.path.join(os.path.dirname(__file__), 'templates')
 )
+
+app.wsgi_app = WhiteNoise(app.wsgi_app, root=app.static_folder)
 
 
 app = Flask(__name__)
