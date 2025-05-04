@@ -1,8 +1,13 @@
 from flask import Flask, render_template, request, jsonify, make_response
 from bot2 import chat
+import os
 
-
-app = Flask(__name__, static_url_path='/static', static_folder='../static', template_folder='../templates')
+app = Flask(
+    __name__,
+    static_url_path='/static',
+    static_folder=os.path.join(os.path.dirname(__file__), 'static'),
+    template_folder=os.path.join(os.path.dirname(__file__), 'templates')
+)
 
 
 app = Flask(__name__)
